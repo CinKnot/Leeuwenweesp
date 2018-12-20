@@ -4,7 +4,7 @@ var app = new Vue({
 		url: "https://api.myjson.com/bins/14hs20",
 		activities: [],
 		data: {},
-		CalendarApp: {},
+
 
 	},
 	created() {
@@ -21,83 +21,62 @@ var app = new Vue({
 				.then(json => {
 					app.data = json;
 					console.log(app.data);
-				app.CalendarApp = 
-//					app.getCalendarApp("Sunday 4 August");
 
 				})
 				.catch(error => console.log(error))
 		},
-		getCalendarApp(date) {
 
-			if (!(date instanceof Date)) {
-				date = new Date();
-			}
+		var events = [
 
-			this.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-			this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-			this.quotes = ['Hello', 'Hi', 'Activities', 'Drinks'];
-			this.apts = [
-				{
-					name: 'Finish this web app',
-					endTime: new Date(2016, 4, 30, 23),
-					startTime: new Date(2016, 4, 30, 21),
-					day: new Date(2016, 4, 30).toString()
-    },
-				{
-					name: 'My Birthday!',
-					endTime: new Date(2016, 4, 1, 23, 59),
-					startTime: new Date(2016, 4, 1, 0),
-					day: new Date(2016, 4, 1).toString()
-    },
+			{
+				'Date': new Date(2018, 20, 12),
+				'Title 1': 'Christmas Drink from 08:00 - 23:30 p.m.',
+				'Link': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2439.3724830653286!2d5.040531215243318!3d52.309243179774846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c60dbd7047fbf5%3A0x1b3a0461a9da1c7!2sCaf%C3%A9+Toeters+En+Bellen!5e0!3m2!1snl!2snl!4v1545126490115'
+			},
 
-  ];
+			{
+				'Date': new Date(2018, 22, 12),
+				'Title 2': 'Kids Soccer Tournament from 13:00 - 17:00 p.m.',
+				'Link': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2438.9796050915042!2d5.02797251524368!3d52.31637257977625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c60db7f54ef115%3A0x5fb05e169e5b57ce!2sFC+Weesp!5e0!3m2!1snl!2snl!4v1545127607356'
+			},
 
-			this.aptDates = [new Date(2016, 4, 30).toString(), new Date(2016, 4, 1).toString()];
-			this.eles = {};
-			this.calDaySelected = null;
+			{
+				'Date': new Date(2019, 23, 01),
+				'Title 3': 'Sustainable Neighborhood from 20:00 - 22:30 p.m.',
+				'Link': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2439.1606133728874!2d5.043451315243551!3d52.31308797977559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c60d95dceb5505%3A0x80b2a387ea0e7cfa!2sPylades+%7C+Microsoft+Gold+Partner!5e0!3m2!1snl!2snl!4v1545130394300'
+			},
 
-			this.calendar = document.getElementById("calendar-app");
+			{
+				'Date': new Date(2019, 23, 02),
+				'Title 3': 'Scavenger Hunt from 20:00 - 22:30 p.m.',
+				'Link': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2438.949537299933!2d5.036180715243712!3d52.316918179776294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c60db829c5d5cb%3A0x2044c88622863567!2sSportcomplex+Papelaan!5e0!3m2!1snl!2snl!4v1545130909259'
+			},
 
-			this.calendarView = document.getElementById("dates");
+			{
+				'Date': new Date(2019, 23, 02),
+				'Title 3': 'Scavenger Hunt from 20:00 - 22:30 p.m.',
+				'Link': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2438.949537299933!2d5.036180715243712!3d52.316918179776294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c60db829c5d5cb%3A0x2044c88622863567!2sSportcomplex+Papelaan!5e0!3m2!1snl!2snl!4v1545130909259'	
+		},
 
-			this.calendarMonthDiv = document.getElementById("calendar-month");
-			this.calendarMonthLastDiv = document.getElementById("calendar-month-last");
-			this.calendarMonthNextDiv = document.getElementById("calendar-month-next");
+			{
+				'Date': new Date(2019, 22, 03),
+				'Title 3': 'Spring is in the Air Drinks from 20:00 - 22:30 p.m.',
+				'Link': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2439.3724830653286!2d5.040531215243318!3d52.309243179774846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c60dbd7047fbf5%3A0x1b3a0461a9da1c7!2sCaf%C3%A9+Toeters+En+Bellen!5e0!3m2!1snl!2snl!4v1545126490115'	 
+				 },
 
-			this.dayInspirationalQuote = document.getElementById("inspirational-quote");
+			{
+				'Date': new Date(2019, 27, 04),
+				'Title 3': 'Queens birthday Free Market from 09:00 - 12:30 p.m.',
+				'Link': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2438.949537299933!2d5.036180715243712!3d52.316918179776294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c60dbe9aee095f%3A0xd0bd883260732023!2sMediaLab+Marketing!5e0!3m2!1snl!2snl!4v1545132714414'	  
+	
+	},
 
-			this.todayIsSpan = document.getElementById("footer-date");
-			// this.eventsCountSpan = document.getElementById("footer-events");
-			this.dayViewEle = document.getElementById("day-view");
-			this.dayViewExitEle = document.getElementById("day-view-exit");
-			this.dayViewDateEle = document.getElementById("day-view-date");
-			this.addDayEventEle = document.getElementById("add-event");
-			this.dayEventsEle = document.getElementById("day-events");
+			{
+				'Date': new Date(2019, 25, 05),
+				'Title 3': 'Family Tennis Tournament from 10:00 - 16:00 p.m.',
+				'Link': '"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2439.0484251134044!2d5.032258415243629!3d52.31512377977587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c5dff5c706cebd%3A0x4c9a1b53641123b3!2sWeesper+Tennis+Club!5e0!3m2!1snl!2snl!4v1545133332396"'
+];
 
-			this.dayEventAddForm = {
-				cancelBtn: document.getElementById("add-event-cancel"),
-				addBtn: document.getElementById("add-event-save"),
-				nameEvent: document.getElementById("input-add-event-name"),
-				startTime: document.getElementById("input-add-event-start-time"),
-				endTime: document.getElementById("input-add-event-end-time"),
-				startAMPM: document.getElementById("input-add-event-start-ampm"),
-				endAMPM: document.getElementById("input-add-event-end-ampm")
-			};
-			this.dayEventsList = document.getElementById("day-events-list");
-			this.dayEventBoxEle = document.getElementById("add-day-event-box");
-
-			/* Start the app */
-			this.showView(date);
-			this.addEventListeners();
-			this.todayIsSpan.textContent = "Today is " + this.months[date.getMonth()] + " " + date.getDate();
-		}
 	}
 
 });
-
-
-
-//
-//var calendar = new CalendarApp();
-//console.log(calendar);
-
